@@ -32,6 +32,7 @@ jobs:
           test -f _site/index.html
           sed -i '/<div class="kpi-baseline">/d' _site/index.html
           cat deployment-overrides.css >> _site/styles.css
+          cat education-overrides.js >> _site/script.js
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
