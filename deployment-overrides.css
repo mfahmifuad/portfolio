@@ -1,0 +1,34 @@
+.kpi-baseline {
+  display: none !important;
+}
+
+@media (max-width: 560px) {
+  .recognition-grid article {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .recognition-grid img {
+    aspect-ratio: 16 / 10;
+    display: block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .recognition-grid article div {
+    background: var(--surface);
+    padding: 1.25rem;
+  }
+
+  .recognition-grid article h3 {
+    font-size: 1.15rem;
+    margin: 0.4rem 0 0.55rem;
+  }
+
+  .recognition-grid article p {
+    line-height: 1.55;
+    margin: 0;
+  }
+}
