@@ -24,12 +24,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract portfolio
+      - name: Extract and prepare portfolio
         run: |
           rm -rf _site
           mkdir _site
           unzip -q portfolio.zip -d _site
           test -f _site/index.html
+          sed -i '/<div class="kpi-baseline">/d' _site/index.html
+          cat deployment-overrides.css >> _site/styles.css
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
