@@ -34,6 +34,12 @@ jobs:
           cat deployment-overrides.css >> _site/styles.css
           cat education-overrides.js >> _site/script.js
 
+      - name: Include project dashboards
+        run: |
+          mkdir -p _site/project
+          cp -R project/. _site/project/
+          test -s _site/project/WISE/index.html
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
