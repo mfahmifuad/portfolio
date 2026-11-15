@@ -50,11 +50,13 @@ function detail(key){
 }
 function overviewMonth(m,i){const v=(D.cleverence[i].progress+D.pozyx[i].progress)/2;return '<article class="month '+phaseClass(v,i)+(i===D.currentMonth?' current':'')+'"><span class="node" aria-hidden="true"></span><div class="month-date">'+e(D.months[i])+'</div><div class="card"><div class="card-title"><h3>'+e(m.phase)+'</h3></div>'+progress(v,'overview',i,'Combined scope')+'<section class="field"><h4>Joint scope</h4><p>'+e(m.scope)+'</p></section><section class="field highlights"><h4>Highlights</h4><p>'+e(m.highlights)+'</p></section><section class="field support"><h4>Management support</h4><p>'+e(m.support)+'</p></section></div></article>';}
 function overview(){
+ const managementPriorities=D.months.map((month,i)=>({month,support:D.overview[i].support})).slice(-3)
+  .map(({month,support})=>'<p><b>'+e(month.split(' ')[0])+'</b> '+e(support)+'</p>').join('');
  return '<section class="page overview" data-view="overview" '+(active==='overview'?'':'hidden')+' aria-label="Overall project dashboard">'+title('Project overview','WISE · INVENTORY AUTOMATION + ASSET TRACKING')+
  '<div class="overview-top"><section class="overall-score"><h2>Project Progress</h2>'+scoreButton(totalScore(),'method',0,'View overall assessment method')+'<p>'+scheduleLabel+' · 4-month POC</p></section>'+
  '<section class="stream-scores"><div class="stream-score"><div class="stream-heading"><span>Cleverence</span>'+scoreButton(streamScore('cleverence'),'cleverence',-1)+'</div><p>Nov '+pc(D.cleverence[D.currentMonth].progress)+' · expansion underway</p></div>'+
  '<div class="stream-score purple"><div class="stream-heading"><span>Pozyx</span>'+scoreButton(streamScore('pozyx'),'pozyx',-1)+'</div><p>Nov '+pc(D.pozyx[D.currentMonth].progress)+' · GPS testing underway</p></div></section>'+
- '<section class="management"><h2>Management priorities</h2><p><b>01</b>Assign an ICT lead for gateway diagnostics.</p><p><b>02</b>Direct phased expansion using existing staff.</p><p><b>03</b>Agree pass criteria for STO and GPS field tests.</p></section></div>'+
+ '<section class="management"><h2>Management priorities</h2>'+managementPriorities+'</section></div>'+
  '<div class="overview-metrics"><div class="overview-metric"><b>'+ratio(recordTotals.completed,recordTotals.total)+'</b><span>Reported completions · W1–W7</span></div><div class="overview-metric"><b>'+pc(stockAgreement)+'</b><span>SAP quantity agreement · '+ratio(stock.matched,stock.checked)+'</span></div><div class="overview-metric"><b>'+pc(checkRate)+'</b><span>Pozyx checks passed · W7</span></div></div>'+
  '<div class="timeline-head"><h2>Project Timeline</h2>'+legend()+'</div><div class="timeline">'+D.overview.map(overviewMonth).join('')+'</div>'+caption('01')+'</section>';
 }
